@@ -2,6 +2,7 @@ package com.mywallet.myAccount;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,35 +13,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AccountController {
 
-    AccountRepository accountRepository = new AccountRepository();
+    @Autowired
+    AccountService accountService;
 
     @GetMapping("/accounts")
-    public List<Accounts> getAllAccounts() {
-        return accountRepository.getAllAccounts();
+    public List<Account> getAllAccounts() {
+        return accountService.getAllAccounts();
     }
 
     @GetMapping("/accounts/{user}")
-    public List<Accounts> getAllUsersAccounts(@PathVariable String user) {
-        return accountRepository.getUsersAccounts(user);
+    public List<Account> getAllUsersAccounts(@PathVariable String user) {
+        return accountService.getUsersAccounts(user);
     }
 
-    @GetMapping("/accounts/user/{id}")
-    public Accounts getUserAccount(@PathVariable int id) {
-        return accountRepository.getUserAccount(id);
+    @GetMapping("/accounts/{user}/{id}")
+    public Account getUserAccount(@PathVariable int id, @PathVariable String user) {
+        return accountService.getUserAccount(id, user);
     }
 
-    @PutMapping("/accounts/user/1")
-    public String updateUserAccount() {
-        return "update user account with id 1";
+    @PutMapping("/accounts/{userName}/{id}")
+    public Account deposit(@PathVariable int id, @PathVariable String userName) {
+        return accountService.deposit(id, userName, 500.56);
     }
 
-    @PostMapping("/accounts/user")
-    public String createUserAccount() {
-        return "create user account";
+    @PostMapping("/accounts/{userName}/{currency}")
+    public Account createUserAccount(@PathVariable String userName, @PathVariable String currency) {
+        return accountService.createAccount("newUser", "USD");
     }
 
-    @DeleteMapping("/accounts/user/1")
-    public String deleteUserAccount() {
-        return "delete user account with id 1";
+    @DeleteMapping("/accounts/{userName}/{id}")
+    public List<Account> deleteUserAccount(@PathVariable int id, @PathVariable String userName) {
+        return accountService.deleteAccount(id, userName);
     }
 }

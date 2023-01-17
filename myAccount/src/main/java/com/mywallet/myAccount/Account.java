@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-public class Accounts {
+public class Account {
     @Getter @Setter
     @Id
     private int id;
@@ -23,7 +23,7 @@ public class Accounts {
     @Getter @Setter
     private Date lastUpdate;
     
-    public Accounts(int id, String username, double balance, String currency, Date creationDate, Date lastUpdate) {
+    public Account(int id, String username, double balance, String currency, Date creationDate, Date lastUpdate) {
         this.id = id;
         this.username = username;
         this.balance = balance;
