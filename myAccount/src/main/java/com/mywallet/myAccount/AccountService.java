@@ -12,8 +12,8 @@ public class AccountService {
     AccountRepository accountRepository;
     
     public Account getUserAccount(int index, String user) {
-        if (user.equals(accountRepository.getUserAccount(index-1).getUsername())) {
-            return accountRepository.getUserAccount(index-1);
+        if (user.equals(accountRepository.getUserAccount(index).getUsername())) {
+            return accountRepository.getUserAccount(index);
         }
         return null;
     }
@@ -46,6 +46,7 @@ public class AccountService {
     }
 
     public boolean usernameAndIdMatchAUser(int id, String username) {
-        return username.equalsIgnoreCase(accountRepository.getUserAccount(id - 1).getUsername());
+        int index = id - 1;
+        return username.equalsIgnoreCase(accountRepository.getUserAccount(index).getUsername());
     }
 }
