@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -64,11 +65,11 @@ public class AccountServiceTest {
     @Test
     public void createAccountTest() {
         Account acc = new Account(234, "Han", 0, "credits", null, null);
-        when(accountRepository.createAccount("Han", "credits")).thenReturn(acc);
+        when(accountRepository.createAccount(acc)).thenReturn(HttpStatus.CREATED);
 
-        Account result = accountService.createAccount("Han", "credits");
+        HttpStatus result = accountService.createAccount(acc);
 
-        assertEquals("credits", result.getCurrency());
+        assertEquals(HttpStatus.CREATED, result);
     }
 
     // I know test up til now are a bit redundant, only made for practise
@@ -86,9 +87,5 @@ public class AccountServiceTest {
     }
 
 
-    @Test
-    public void deleteAccountTest() {
-        Account acc = new Account(234, "Leia", 0, "credits", null, null);
-        when(accountRepository.getUserAccount(0)).thenReturn(acc);
-    }
+    
 }

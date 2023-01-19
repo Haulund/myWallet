@@ -30,5 +30,12 @@ public class Account {
         this.currency = currency;
         this.creationDate = creationDate;
         this.lastUpdate = lastUpdate;
+    } 
+
+    public Account() {
+        this.creationDate = new Date();
     }
+
+    //change Id generation
+    //this..id = UUID.randomUUID().toString();
 }

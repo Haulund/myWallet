@@ -3,11 +3,14 @@ package com.mywallet.myAccount;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,9 +39,13 @@ public class AccountController {
         return accountService.deposit(id, userName, 500.56);
     }
 
-    @PostMapping("/accounts/{userName}/{currency}")
-    public Account createUserAccount(@PathVariable String userName, @PathVariable String currency) {
-        return accountService.createAccount("newUser", "USD");
+    @PostMapping("/accounts")
+    public ResponseEntity<Account> createUserAccount(@RequestBody Account account) {
+        HttpStatus result = accountService.createAccount(account);
+        if (result == HttpStatus.CREATED) {
+            return new ResponseEntity<>(account, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/accounts/{userName}/{id}")

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,10 +32,9 @@ public class AccountRepository {
             .collect(Collectors.toList());
     }
     
-    public Account createAccount(String userName, String currency) {
-        Account newAcc = new Account(accounts.size() + 1, userName, 0, currency, new Date(), null);
-        accounts.add(newAcc);
-        return newAcc;
+    public HttpStatus createAccount(Account acc) {
+        accounts.add(acc);
+        return HttpStatus.CREATED;
     }
 
 

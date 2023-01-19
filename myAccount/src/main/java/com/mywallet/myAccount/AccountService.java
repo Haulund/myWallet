@@ -3,6 +3,7 @@ package com.mywallet.myAccount;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,7 +11,10 @@ public class AccountService {
 
     @Autowired
     AccountRepository accountRepository;
-    
+
+    @Autowired
+    HistoryFeignClient historyFeignClient;
+   
     public Account getUserAccount(int index, String user) {
         if (user.equals(accountRepository.getUserAccount(index).getUsername())) {
             return accountRepository.getUserAccount(index);
@@ -26,10 +30,10 @@ public class AccountService {
         return accountRepository.getUsersAccounts(user);
     }
     
-    public Account createAccount(String userName, String currency) {
-        return accountRepository.createAccount(userName, currency);
+    public HttpStatus createAccount(Account account) {
+        accountRepository.createAccount(account);
+        return HttpStatus.CREATED;
     }
-
 
     public List<Account> deleteAccount(int id, String username) {
         if (usernameAndIdMatchAUser(id, username)){
@@ -42,7 +46,9 @@ public class AccountService {
         if (usernameAndIdMatchAUser(id, username)){
             accountRepository.deposit(id, amount);
         }
-        return accountRepository.getUserAccount(id-1);
+        Account acc = accountRepository.getUserAccount(id-1);
+        historyFeignClient.addHistory(acc)
+        return acc;
     }
 
     public boolean usernameAndIdMatchAUser(int id, String username) {
