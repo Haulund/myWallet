@@ -33,7 +33,7 @@ public class AccountService {
 
     public List<Account> deleteAccount(int id, String username) {
         if (usernameAndIdMatchAUser(id, username)){
-            accountRepository.deleteAccount(id-1, username);
+            accountRepository.deleteAccount(id, username);
         }
         return accountRepository.getAllAccounts();
     }

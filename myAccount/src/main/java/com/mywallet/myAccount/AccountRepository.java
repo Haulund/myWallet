@@ -39,7 +39,8 @@ public class AccountRepository {
 
 
     public void deleteAccount(int id, String username) {
-        accounts.remove(accounts.get(id));
+        int index = id-1;
+        accounts.remove(accounts.get(index));
     }
 
     public void deposit(int id, double amount) {
