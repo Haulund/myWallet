@@ -47,7 +47,7 @@ public class AccountService {
             accountRepository.deposit(id, amount);
         }
         Account acc = accountRepository.getUserAccount(id-1);
-        historyFeignClient.addHistory(acc)
+        historyFeignClient.addHistory(acc);
         return acc;
     }
 
