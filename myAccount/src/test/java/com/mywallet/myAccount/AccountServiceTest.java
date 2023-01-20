@@ -3,7 +3,6 @@ package com.mywallet.myAccount;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -134,6 +133,7 @@ public class AccountServiceTest {
         //assert
         assertTrue(250 == result.getBody().getBalance());
         assertTrue(result.getBody().getLastUpdate() != null);
+        
     }
 
     @Test
