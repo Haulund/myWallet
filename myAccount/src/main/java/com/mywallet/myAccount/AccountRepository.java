@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
-import jakarta.persistence.Index;
-
 @Repository
 public class AccountRepository {
     
@@ -20,7 +18,8 @@ public class AccountRepository {
         new Account(3, "userTwo", 832283.32, "USD" ,new Date(), null )
     ));
 
-    public Account getUserAccount(int index) {
+    public Account getUserAccount(int id) {
+        int index = id - 1;
         return accounts.get(index);
     }
 

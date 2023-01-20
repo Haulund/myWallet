@@ -17,9 +17,9 @@ public class AccountService {
     @Autowired
     HistoryFeignClient historyFeignClient;
    
-    public Account getUserAccount(int index, String user) {
-        if (user.equals(accountRepository.getUserAccount(index).getUsername())) {
-            return accountRepository.getUserAccount(index);
+    public Account getUserAccount(int id, String user) {
+        if (user.equals(accountRepository.getUserAccount(id).getUsername())) {
+            return accountRepository.getUserAccount(id);
         }
         return null;
     }
@@ -38,16 +38,16 @@ public class AccountService {
     }
 
     public List<Account> deleteAccount(int id, String username) {
-        if (usernameAndIdMatchAUser(id, username)){
+        Account acc = accountRepository.getUserAccount(id);
+        if (usernameAndIdMatchAUser(acc, username)){
             accountRepository.deleteAccount(id, username);
         }
         return accountRepository.getAllAccounts();
     }
 
     public ResponseEntity<Account> deposit(int id, String username, double amount) {
-        int index = id - 1;
-        Account acc = accountRepository.getUserAccount(index);
-        if (usernameAndIdMatchAUser(id, username)){
+        Account acc = accountRepository.getUserAccount(id);
+        if (usernameAndIdMatchAUser(acc, username)){
             acc.setBalance(acc.getBalance() + amount);
             acc.setLastUpdate(new Date());
             accountRepository.updateAccount(id, acc);
@@ -57,8 +57,19 @@ public class AccountService {
         return new ResponseEntity<Account>(acc, HttpStatus.BAD_REQUEST);
     }
 
-    public boolean usernameAndIdMatchAUser(int id, String username) {
-        int index = id - 1;
-        return username.equalsIgnoreCase(accountRepository.getUserAccount(index).getUsername());
+    public boolean usernameAndIdMatchAUser(Account acc, String username) {
+        return username.equalsIgnoreCase(acc.getUsername());
+    }
+
+    public ResponseEntity<Account> withdraw(int id, String username, double amount) {
+        Account acc = accountRepository.getUserAccount(id);
+        if (usernameAndIdMatchAUser(acc, username)){
+            acc.setBalance(acc.getBalance() - amount);
+            acc.setLastUpdate(new Date());
+            accountRepository.updateAccount(id, acc);
+            historyFeignClient.addHistory(acc);
+            return new ResponseEntity<Account>(acc, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<Account>(acc, HttpStatus.BAD_REQUEST);
     }
 }
