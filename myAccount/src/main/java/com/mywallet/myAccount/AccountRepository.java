@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import jakarta.persistence.Index;
+
 @Repository
 public class AccountRepository {
     
@@ -46,5 +48,10 @@ public class AccountRepository {
     public void deposit(int id, double amount) {
         Account acc = accounts.get(id - 1);
         acc.setBalance(acc.getBalance() + amount);
+    }
+
+    public void updateAccount(int id, Account acc) {
+        int index = id - 1;
+        accounts.set(index, acc);
     }
 }

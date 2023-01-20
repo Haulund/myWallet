@@ -35,8 +35,8 @@ public class AccountController {
     }
 
     @PutMapping("/accounts/{userName}/{id}")
-    public Account deposit(@PathVariable int id, @PathVariable String userName) {
-        return accountService.deposit(id, userName, 500.56);
+    public ResponseEntity<Account> deposit(@PathVariable int id, @PathVariable String userName, @RequestBody Account account) {
+        return accountService.deposit(id, userName, account.getBalance());
     }
 
     @PostMapping("/accounts")

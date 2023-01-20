@@ -1,9 +1,11 @@
 package com.mywallet.myAccount;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,13 +44,17 @@ public class AccountService {
         return accountRepository.getAllAccounts();
     }
 
-    public Account deposit(int id, String username, double amount) {
+    public ResponseEntity<Account> deposit(int id, String username, double amount) {
+        int index = id - 1;
+        Account acc = accountRepository.getUserAccount(index);
         if (usernameAndIdMatchAUser(id, username)){
-            accountRepository.deposit(id, amount);
+            acc.setBalance(acc.getBalance() + amount);
+            acc.setLastUpdate(new Date());
+            accountRepository.updateAccount(id, acc);
+            historyFeignClient.addHistory(acc);
+            return new ResponseEntity<Account>(acc, HttpStatus.ACCEPTED);
         }
-        Account acc = accountRepository.getUserAccount(id-1);
-        historyFeignClient.addHistory(acc);
-        return acc;
+        return new ResponseEntity<Account>(acc, HttpStatus.BAD_REQUEST);
     }
 
     public boolean usernameAndIdMatchAUser(int id, String username) {
