@@ -42,7 +42,7 @@ public class AccountController {
         return accountService.deposit(id, userName, account.getBalance());
     }
 
-    @PutMapping("/acounts/wihtdraw/{userName}/{id}")
+    @PutMapping("/accounts/withdraw/{userName}/{id}")
     public ResponseEntity<Account> withdraw(@PathVariable int id, @PathVariable String userName, @RequestBody Account account) {
         return accountService.withdraw(id, userName, account.getBalance());
     }

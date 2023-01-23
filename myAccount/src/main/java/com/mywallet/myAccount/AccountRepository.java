@@ -13,9 +13,9 @@ import org.springframework.stereotype.Repository;
 public class AccountRepository {
     
     private List<Account> accounts = new ArrayList<>(Arrays.asList(
-        new Account(1, "userOne", 23323.32, "USD" ,new Date(), null ),
-        new Account(2, "userOne", 0, "USD" ,new Date(), null ),
-        new Account(3, "userTwo", 832283.32, "USD" ,new Date(), null )
+        new Account(1, "userOne", 23323.32, "USD" ,new Date(), null ,"", ""),
+        new Account(2, "userOne", 0, "USD" ,new Date(), null ,"", ""),
+        new Account(3, "userTwo", 832283.32, "USD" ,new Date(), null, "", "")
     ));
 
     public Account getUserAccount(int id) {

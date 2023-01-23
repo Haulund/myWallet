@@ -50,6 +50,7 @@ public class AccountService {
         if (usernameAndIdMatchAUser(acc, username)){
             acc.setBalance(acc.getBalance() + amount);
             acc.setLastUpdate(new Date());
+            acc.setTransactionType("DEPOSIT");
             accountRepository.updateAccount(id, acc);
             historyFeignClient.addHistory(acc);
             return new ResponseEntity<Account>(acc, HttpStatus.ACCEPTED);
@@ -66,6 +67,7 @@ public class AccountService {
         if (usernameAndIdMatchAUser(acc, username)){
             acc.setBalance(acc.getBalance() - amount);
             acc.setLastUpdate(new Date());
+            acc.setTransactionType("WITHDRAW");
             accountRepository.updateAccount(id, acc);
             historyFeignClient.addHistory(acc);
             return new ResponseEntity<Account>(acc, HttpStatus.ACCEPTED);

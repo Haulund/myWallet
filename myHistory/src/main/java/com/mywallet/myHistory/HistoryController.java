@@ -23,8 +23,6 @@ public class HistoryController {
 
     @PostMapping("/history")
     public ResponseEntity<HistoryAccount> addHistory(@RequestBody HistoryAccount hisAcc) {
-        
-        
         //service
         double currentBalance;
         double balance = hisAcc.getBalance();
@@ -44,7 +42,15 @@ public class HistoryController {
 
         double incomingBalance = hisAcc.getBalance();
         double transactioAmount = incomingBalance - currentBalance;
-        HistoryAccount acc = new HistoryAccount(hisAcc.getId(), hisAcc.getUsername(), balance, "", transactioAmount, hisAcc.getCurrency(), hisAcc.getCreationDate(), hisAcc.getLastUpdate());
+        HistoryAccount acc = new HistoryAccount(
+            hisAcc.getId(),
+            hisAcc.getUsername(), 
+            balance, 
+            hisAcc.getTransactionType(), 
+            transactioAmount, 
+            hisAcc.getCurrency(), 
+            hisAcc.getCreationDate(), 
+            hisAcc.getLastUpdate());
 
         //repo function
         history.add(acc);

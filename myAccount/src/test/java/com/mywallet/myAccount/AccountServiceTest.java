@@ -34,8 +34,8 @@ public class AccountServiceTest {
     public void getAllAccountsTest() {
         // Mock data
         List<Account> data = new ArrayList<>(Arrays.asList(
-            new Account(1, "Steffen", 5000, "DKR",  new Date(), null),
-            new Account(2, "Skywalker", 2500,"USD", new Date(), null)
+            new Account(1, "Steffen", 5000, "DKR",  new Date(), null, "", ""),
+            new Account(2, "Skywalker", 2500,"USD", new Date(), null, "", "")
         ));
 
         // Arrange
@@ -52,7 +52,7 @@ public class AccountServiceTest {
     @Test
     public void getUserAccountTest() {
         // Mock Data
-        Account acc = new Account(1, "Steffen", 5000, "DKR",  new Date(), null);
+        Account acc = new Account(1, "Steffen", 5000, "DKR",  new Date(), null, "", "");
 
         // Arrange
         when(accountRepository.getUserAccount(0)).thenReturn(acc);
@@ -69,8 +69,8 @@ public class AccountServiceTest {
     public void getUsersAccountsTest() {
         // Data
         List<Account> data = new ArrayList<>(Arrays.asList(
-            new Account(1, "Steffen", 5000, "DKR",  new Date(), null),
-            new Account(2, "Steffen", 2500,"USD", new Date(), null)
+            new Account(1, "Steffen", 5000, "DKR",  new Date(), null, "", ""),
+            new Account(2, "Steffen", 2500,"USD", new Date(), null, "", "")
         ));
 
         // Arrange
@@ -88,7 +88,7 @@ public class AccountServiceTest {
     @Test
     public void createAccountTest() {
         // Mock Data
-        Account acc = new Account(234, "Han", 0, "credits", null, null);
+        Account acc = new Account(234, "Han", 0, "credits", null, null, "", "");
 
         // Arrange
         when(accountRepository.createAccount(acc)).thenReturn(HttpStatus.CREATED);
@@ -105,7 +105,7 @@ public class AccountServiceTest {
     @Test
     public void usernameAndIdMatchAUserTest() {
         // Mock Data
-        Account acc = new Account(234, "Leia", 0, "credits", null, null);
+        Account acc = new Account(234, "Leia", 0, "credits", null, null, "", "");
         
         // Act
         boolean resultTrue = accountService.usernameAndIdMatchAUser(acc, "Leia");
@@ -119,8 +119,8 @@ public class AccountServiceTest {
     @Test
     public void depositTest() {
         //Mock Data
-        Account acc = new Account(1, "Chewie", 0, "credits", null, null);
-        ResponseEntity<Account> res = new ResponseEntity<Account>(new Account(1, "Chewie", 250, "credits", null, null), HttpStatus.ACCEPTED);
+        Account acc = new Account(1, "Chewie", 0, "credits", null, null, "", "");
+        ResponseEntity<Account> res = new ResponseEntity<Account>(new Account(1, "Chewie", 250, "credits", null, null, "", ""), HttpStatus.ACCEPTED);
         
         //Arrange
         when(accountRepository.getUserAccount(1)).thenReturn(acc);
@@ -139,8 +139,8 @@ public class AccountServiceTest {
     @Test
     public void withdrawTest() {
         //Mock Data
-        Account acc = new Account(1, "Anakin", 0, "credits", null, null);
-        ResponseEntity<Account> res = new ResponseEntity<Account>(new Account(1, "Anakin", 500, "credits", null, null), HttpStatus.ACCEPTED);
+        Account acc = new Account(1, "Anakin", 0, "credits", null, null, "", "");
+        ResponseEntity<Account> res = new ResponseEntity<Account>(new Account(1, "Anakin", 500, "credits", null, null, "" ,""), HttpStatus.ACCEPTED);
         
         //Arrange
         when(accountRepository.getUserAccount(1)).thenReturn(acc);
