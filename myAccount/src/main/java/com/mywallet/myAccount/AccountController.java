@@ -20,18 +20,21 @@ public class AccountController {
     AccountService accountService;
 
     @GetMapping("/accounts")
-    public List<Account> getAllAccounts() {
-        return accountService.getAllAccounts();
+    public ResponseEntity<List<Account>> getAllAccounts() {
+        List<Account> acc = accountService.getAllAccounts();
+        return new ResponseEntity<List<Account>>(acc, HttpStatus.OK);
     }
 
     @GetMapping("/accounts/{user}")
-    public List<Account> getAllUsersAccounts(@PathVariable String user) {
-        return accountService.getUsersAccounts(user);
+    public ResponseEntity<List<Account>> getAllUsersAccounts(@PathVariable String user) {
+        List<Account> acc = accountService.getUsersAccounts(user);
+        return new ResponseEntity<List<Account>>(acc, HttpStatus.OK);
     }
 
     @GetMapping("/accounts/{user}/{id}")
-    public Account getUserAccount(@PathVariable int id, @PathVariable String user) {
-        return accountService.getUserAccount(id, user);
+    public ResponseEntity<Account> getUserAccount(@PathVariable int id, @PathVariable String user) {
+        Account acc = accountService.getUserAccount(id, user);
+        return new ResponseEntity<Account>(acc, HttpStatus.OK);
     }
 
     @PutMapping("/accounts/{userName}/{id}")
@@ -54,7 +57,8 @@ public class AccountController {
     }
 
     @DeleteMapping("/accounts/{userName}/{id}")
-    public List<Account> deleteUserAccount(@PathVariable int id, @PathVariable String userName) {
-        return accountService.deleteAccount(id, userName);
+    public ResponseEntity<List<Account>> deleteUserAccount(@PathVariable int id, @PathVariable String userName) {
+        List<Account> acc = accountService.deleteAccount(id, userName);
+        return new ResponseEntity<List<Account>>(acc, HttpStatus.OK);
     }
 }
