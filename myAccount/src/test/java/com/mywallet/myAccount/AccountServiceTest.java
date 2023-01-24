@@ -19,6 +19,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.mywallet.myAccount.pojo.Account;
+import com.mywallet.myAccount.repository.AccountRepository;
+import com.mywallet.myAccount.service.AccountService;
+import com.mywallet.myAccount.utility.HistoryFeignClient;
+
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceTest {
     @Mock

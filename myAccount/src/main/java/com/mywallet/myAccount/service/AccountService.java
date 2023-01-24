@@ -1,4 +1,4 @@
-package com.mywallet.myAccount;
+package com.mywallet.myAccount.service;
 
 import java.util.Date;
 import java.util.List;
@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.mywallet.myAccount.pojo.Account;
+import com.mywallet.myAccount.repository.AccountRepository;
+import com.mywallet.myAccount.utility.HistoryFeignClient;
 
 @Service
 public class AccountService {

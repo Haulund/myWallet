@@ -1,4 +1,4 @@
-package com.mywallet.myAccount;
+package com.mywallet.myAccount.pojo;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.mywallet.myAccount;
+package com.mywallet.myAccount.controller;
 
 import java.util.List;
 
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mywallet.myAccount.pojo.Account;
+import com.mywallet.myAccount.service.AccountService;
+
 @RestController
 public class AccountController {
 
@@ -21,20 +24,17 @@ public class AccountController {
 
     @GetMapping("/accounts")
     public ResponseEntity<List<Account>> getAllAccounts() {
-        List<Account> acc = accountService.getAllAccounts();
-        return new ResponseEntity<List<Account>>(acc, HttpStatus.OK);
+        return new ResponseEntity<List<Account>>(accountService.getAllAccounts(), HttpStatus.OK);
     }
 
     @GetMapping("/accounts/{user}")
     public ResponseEntity<List<Account>> getAllUsersAccounts(@PathVariable String user) {
-        List<Account> acc = accountService.getUsersAccounts(user);
-        return new ResponseEntity<List<Account>>(acc, HttpStatus.OK);
+        return new ResponseEntity<List<Account>>(accountService.getUsersAccounts(user), HttpStatus.OK);
     }
 
     @GetMapping("/accounts/{user}/{id}")
     public ResponseEntity<Account> getUserAccount(@PathVariable int id, @PathVariable String user) {
-        Account acc = accountService.getUserAccount(id, user);
-        return new ResponseEntity<Account>(acc, HttpStatus.OK);
+        return new ResponseEntity<Account>(accountService.getUserAccount(id, user), HttpStatus.OK);
     }
 
     @PutMapping("/accounts/{userName}/{id}")
@@ -58,7 +58,6 @@ public class AccountController {
 
     @DeleteMapping("/accounts/{userName}/{id}")
     public ResponseEntity<List<Account>> deleteUserAccount(@PathVariable int id, @PathVariable String userName) {
-        List<Account> acc = accountService.deleteAccount(id, userName);
-        return new ResponseEntity<List<Account>>(acc, HttpStatus.OK);
+        return new ResponseEntity<List<Account>>(accountService.deleteAccount(id, userName), HttpStatus.OK);
     }
 }

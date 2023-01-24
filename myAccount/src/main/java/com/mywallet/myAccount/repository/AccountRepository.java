@@ -1,4 +1,4 @@
-package com.mywallet.myAccount;
+package com.mywallet.myAccount.repository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+
+import com.mywallet.myAccount.pojo.Account;
 
 @Repository
 public class AccountRepository {

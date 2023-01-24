@@ -24,5 +24,4 @@ public class HistoryAccount {
     private String currency;
     private Date creationDate;
     private Date lastUpdate;
-
 }
