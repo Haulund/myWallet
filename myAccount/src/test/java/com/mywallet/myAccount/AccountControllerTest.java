@@ -46,6 +46,7 @@ public class AccountControllerTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals(data.get(1).getUsername(), result.getBody().get(1).getUsername());
+
     }
 
     @Test
@@ -62,6 +63,7 @@ public class AccountControllerTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         resBody.forEach(item -> assertEquals("userOne", item.getUsername()));
+
     }
 
     @Test
@@ -72,6 +74,7 @@ public class AccountControllerTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals("Skywalker", result.getBody().getUsername());
+
     }
 
     @Test
@@ -89,6 +92,7 @@ public class AccountControllerTest {
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         assertEquals("Skywalker", result.getBody().getUsername());
         assertEquals("DEPOSIT", result.getBody().getTransactionType());
+        
     }
 
     @Test
@@ -106,6 +110,7 @@ public class AccountControllerTest {
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         assertEquals("Skywalker", result.getBody().getUsername());
         assertEquals("WITHDRAW", result.getBody().getTransactionType());
+
     }
 
     @Test
@@ -117,6 +122,7 @@ public class AccountControllerTest {
 
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
         assertEquals("Han Solo", result.getBody().getUsername());
+
     }
     
     @Test
@@ -131,6 +137,7 @@ public class AccountControllerTest {
         
         assertEquals(data, result.getBody());
         assertEquals(HttpStatus.OK, result.getStatusCode());
+
     }
     
 }
