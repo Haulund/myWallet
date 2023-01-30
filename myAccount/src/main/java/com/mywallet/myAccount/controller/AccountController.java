@@ -39,7 +39,7 @@ public class AccountController {
 
     @PutMapping("/accounts/{userName}/{id}")
     public ResponseEntity<Account> deposit(@PathVariable int id, @PathVariable String userName, @RequestBody Account account) {
-        return accountService.deposit(id, userName, account.getBalance());
+        return accountService.deposit(id, userName, account.getTransactionAmount());
     }
 
     @PutMapping("/accounts/withdraw/{userName}/{id}")

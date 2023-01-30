@@ -15,13 +15,13 @@ import lombok.Setter;
 public class Account {
 
     @Id
-    private int id;
+    private int accountId;
     private String username;
     private double balance;
     private String currency;
     private Date creationDate;
     private Date lastUpdate;
-    private String transaction;
+    private double transactionAmount;
     private String transactionType;
 
     public Account() {

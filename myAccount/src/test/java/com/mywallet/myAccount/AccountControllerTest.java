@@ -1,7 +1,6 @@
 package com.mywallet.myAccount;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -36,8 +35,8 @@ public class AccountControllerTest {
     @Test
     public void getAllAccountsTest() {
         List<Account> data = new ArrayList<>(Arrays.asList(
-            new Account(1, "Steffen", 5000, "DKR",  new Date(), null, "", ""),
-            new Account(2, "Skywalker", 2500,"USD", new Date(), null, "", "")
+            new Account(1, "Steffen", 5000, "DKR",  new Date(), null, 0, ""),
+            new Account(2, "Skywalker", 2500,"USD", new Date(), null, 0, "")
         ));
 
         when(accountService.getAllAccounts()).thenReturn(data);
@@ -52,8 +51,8 @@ public class AccountControllerTest {
     @Test
     public void getAllUsersAccountsTest() {
         List<Account> data = new ArrayList<>(Arrays.asList(
-            new Account(1, "userOne", 5000, "DKR",  new Date(), null, "", ""),
-            new Account(2, "userOne", 2500,"USD", new Date(), null, "", "")
+            new Account(1, "userOne", 5000, "DKR",  new Date(), null, 0, ""),
+            new Account(2, "userOne", 2500,"USD", new Date(), null, 0, "")
         ));
         when(accountService.getUsersAccounts("userOne")).thenReturn(data);
 
@@ -68,7 +67,7 @@ public class AccountControllerTest {
 
     @Test
     public void getUserAccountTest() {
-        when(accountService.getUserAccount(1, "Skywalker")).thenReturn(new Account(1, "Skywalker", 2500,"USD", new Date(), null, "", ""));
+        when(accountService.getUserAccount(1, "Skywalker")).thenReturn(new Account(1, "Skywalker", 2500,"USD", new Date(), null, 0, ""));
 
         ResponseEntity<Account> result = accountController.getUserAccount(1, "Skywalker");
 
@@ -79,11 +78,11 @@ public class AccountControllerTest {
 
     @Test
     public void depositTest() {
-        Account inputAccount = new Account(1, "Skywalker", 500 ,"USD", new Date(), null, "", "");
+        Account inputAccount = new Account(1, "Skywalker", 500 ,"USD", new Date(), null, 0, "");
         when(accountService
             .deposit(1, "Skywalker", inputAccount.getBalance()))
             .thenReturn(
-                new ResponseEntity<Account>(new Account(1, "Skywalker", 3000,"USD", new Date(), null, "", "DEPOSIT"), 
+                new ResponseEntity<Account>(new Account(1, "Skywalker", 3000,"USD", new Date(), null, 0, "DEPOSIT"), 
                 HttpStatus.ACCEPTED
             ));
             
@@ -100,12 +99,12 @@ public class AccountControllerTest {
         when(accountService
             .withdraw(1, "Skywalker", 250))
             .thenReturn(
-                new ResponseEntity<Account>(new Account(1, "Skywalker", 2750,"USD", new Date(), null, "", "WITHDRAW"),
+                new ResponseEntity<Account>(new Account(1, "Skywalker", 2750,"USD", new Date(), null, 0, "WITHDRAW"),
                 HttpStatus.ACCEPTED
             )
             );
 
-        ResponseEntity<Account> result = accountController.withdraw(1, "Skywalker", new Account(1, "Skywalker", 250,"USD", new Date(), null, "", "WITHDRAW"));
+        ResponseEntity<Account> result = accountController.withdraw(1, "Skywalker", new Account(1, "Skywalker", 250,"USD", new Date(), null, 0, "WITHDRAW"));
 
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         assertEquals("Skywalker", result.getBody().getUsername());
@@ -115,7 +114,7 @@ public class AccountControllerTest {
 
     @Test
     public void createUserAccountTest() {
-        Account newAcc = new Account(1, "Han Solo", 0,"USD", new Date(), null, "", "");
+        Account newAcc = new Account(1, "Han Solo", 0,"USD", new Date(), null, 0, "");
         when(accountService.createAccount(newAcc)).thenReturn(HttpStatus.CREATED);
 
         ResponseEntity<Account> result = accountController.createUserAccount(newAcc);
@@ -128,8 +127,8 @@ public class AccountControllerTest {
     @Test
     public void deleteAccountTest() {
         List<Account> data = new ArrayList<>(Arrays.asList(
-            new Account(2, "Steffen", 5000, "DKR",  new Date(), null, "", ""),
-            new Account(3, "Skywalker", 2500,"USD", new Date(), null, "", "")
+            new Account(2, "Steffen", 5000, "DKR",  new Date(), null, 0, ""),
+            new Account(3, "Skywalker", 2500,"USD", new Date(), null, 0, "")
         ));
         when(accountService.deleteAccount(1, "Luke")).thenReturn(data);
 

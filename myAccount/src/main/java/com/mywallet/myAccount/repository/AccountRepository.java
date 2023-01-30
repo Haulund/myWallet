@@ -15,9 +15,9 @@ import com.mywallet.myAccount.pojo.Account;
 public class AccountRepository {
     
     private List<Account> accounts = new ArrayList<>(Arrays.asList(
-        new Account(1, "userOne", 23323.32, "USD" ,new Date(), null ,"", ""),
-        new Account(2, "userOne", 0, "USD" ,new Date(), null ,"", ""),
-        new Account(3, "userTwo", 832283.32, "USD" ,new Date(), null, "", "")
+        new Account(1, "userOne", 23323.32, "USD" ,new Date(), null ,0, ""),
+        new Account(2, "userOne", 0, "USD" ,new Date(), null , 0, ""),
+        new Account(3, "userTwo", 832283.32, "USD" ,new Date(), null, 0, "")
     ));
 
     public Account getUserAccount(int id) {
@@ -44,11 +44,6 @@ public class AccountRepository {
     public void deleteAccount(int id, String username) {
         int index = id-1;
         accounts.remove(accounts.get(index));
-    }
-
-    public void deposit(int id, double amount) {
-        Account acc = accounts.get(id - 1);
-        acc.setBalance(acc.getBalance() + amount);
     }
 
     public void updateAccount(int id, Account acc) {
