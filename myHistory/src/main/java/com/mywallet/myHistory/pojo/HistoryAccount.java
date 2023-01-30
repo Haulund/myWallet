@@ -42,4 +42,17 @@ public class HistoryAccount {
         this.lastUpdate = lastUpdate;
     }
 
+    public HistoryAccount(HistoryAccount acc) {
+        this.id = UUID.randomUUID().toString();
+        this.accountId = acc.accountId;
+        this.userId = acc.userId;
+        this.username = acc.username;
+        this.balance = acc.balance;
+        this.transactionType = acc.transactionType;
+        this.transactionAmount = acc.transactionAmount;
+        this.currency = acc.currency;
+        this.creationDate = acc.creationDate;
+        this.lastUpdate = acc.lastUpdate;
+    }
+
 }
