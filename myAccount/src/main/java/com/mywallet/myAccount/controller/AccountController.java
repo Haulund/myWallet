@@ -44,7 +44,11 @@ public class AccountController {
 
     @PutMapping("/accounts/withdraw/{userName}/{id}")
     public ResponseEntity<Account> withdraw(@PathVariable int id, @PathVariable String userName, @RequestBody Account account) {
-        return accountService.withdraw(id, userName, account.getTransactionAmount());
+        Account acc = accountService.withdraw(id, userName, account.getTransactionAmount());
+        if (acc != null) {
+            return new ResponseEntity<>(acc, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<Account>(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/accounts")

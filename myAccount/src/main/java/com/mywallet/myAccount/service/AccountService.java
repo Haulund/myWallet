@@ -67,7 +67,7 @@ public class AccountService {
         return username.equalsIgnoreCase(acc.getUsername());
     }
 
-    public ResponseEntity<Account> withdraw(int id, String username, double amount) {
+    public Account withdraw(int id, String username, double amount) {
         Account acc = accountRepository.getUserAccount(id);
         if (usernameAndIdMatchAUser(acc, username)){
             acc.setBalance(acc.getBalance() - amount);
@@ -76,8 +76,8 @@ public class AccountService {
             acc.setTransactionType("WITHDRAW");
             accountRepository.updateAccount(id, acc);
             historyFeignClient.addHistory(acc);
-            return new ResponseEntity<Account>(acc, HttpStatus.ACCEPTED);
+            return acc;
         }
-        return new ResponseEntity<Account>(acc, HttpStatus.BAD_REQUEST);
+        return null;
     }
 }

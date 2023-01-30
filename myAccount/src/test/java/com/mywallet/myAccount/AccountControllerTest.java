@@ -78,11 +78,11 @@ public class AccountControllerTest {
 
     @Test
     public void depositTest() {
-        Account inputAccount = new Account(1, "Skywalker", 500 ,"USD", new Date(), null, 0, "");
+        Account inputAccount = new Account(1, "Skywalker", 500 ,"USD", new Date(), null, 500, "");
         when(accountService
-            .deposit(1, "Skywalker", inputAccount.getBalance()))
+            .deposit(1, "Skywalker", inputAccount.getTransactionAmount()))
             .thenReturn(
-                new ResponseEntity<Account>(new Account(1, "Skywalker", 3000,"USD", new Date(), null, 0, "DEPOSIT"), 
+                new ResponseEntity<Account>(new Account(1, "Skywalker", 1000,"USD", new Date(), null, 0, "DEPOSIT"), 
                 HttpStatus.ACCEPTED
             ));
             
@@ -96,15 +96,14 @@ public class AccountControllerTest {
 
     @Test
     public void withdrawTest() {
+        Account inputAccount = new Account(1, "Skywalker", 500 ,"USD", new Date(), null, 500, "");
         when(accountService
-            .withdraw(1, "Skywalker", 250))
+            .withdraw(1, "Skywalker", inputAccount.getTransactionAmount()))
             .thenReturn(
-                new ResponseEntity<Account>(new Account(1, "Skywalker", 2750,"USD", new Date(), null, 0, "WITHDRAW"),
-                HttpStatus.ACCEPTED
-            )
+                new Account(1, "Skywalker", 2750,"USD", new Date(), null, 500, "WITHDRAW")
             );
 
-        ResponseEntity<Account> result = accountController.withdraw(1, "Skywalker", new Account(1, "Skywalker", 250,"USD", new Date(), null, 0, "WITHDRAW"));
+        ResponseEntity<Account> result = accountController.withdraw(1, "Skywalker", new Account(1, "Skywalker", 2250,"USD", new Date(), null, 500, "WITHDRAW"));
 
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         assertEquals("Skywalker", result.getBody().getUsername());
