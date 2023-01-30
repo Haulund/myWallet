@@ -71,6 +71,7 @@ public class AccountService {
         Account acc = accountRepository.getUserAccount(id);
         if (usernameAndIdMatchAUser(acc, username)){
             acc.setBalance(acc.getBalance() - amount);
+            acc.setTransactionAmount(amount);
             acc.setLastUpdate(new Date());
             acc.setTransactionType("WITHDRAW");
             accountRepository.updateAccount(id, acc);
