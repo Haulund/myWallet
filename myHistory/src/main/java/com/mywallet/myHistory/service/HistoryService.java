@@ -33,9 +33,9 @@ public class HistoryService {
     
     //deprected
     public Optional<HistoryAccount> getRecentlyUpdatedHistoryAccount(HistoryAccount account, List<HistoryAccount> history) {
-        if (userHasHistory(account.getUsername())){
+        if (userHasHistory(account.getUserId())){
             return history.stream()
-                .filter(acc -> acc.getUsername().equalsIgnoreCase(account.getUsername()))
+                .filter(acc -> acc.getUserId().equalsIgnoreCase(account.getUserId()))
                 .sorted(Comparator.comparing(HistoryAccount::getLastUpdate).reversed())
                 .findFirst(); 
         }

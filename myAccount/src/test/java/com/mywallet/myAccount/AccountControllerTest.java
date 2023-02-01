@@ -44,7 +44,7 @@ public class AccountControllerTest {
         ResponseEntity<List<Account>> result = accountController.getAllAccounts();
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals(data.get(1).getUsername(), result.getBody().get(1).getUsername());
+        assertEquals(data.get(1).getUserId(), result.getBody().get(1).getUserId());
 
     }
 
@@ -61,7 +61,7 @@ public class AccountControllerTest {
         List<Account> resBody = result.getBody();
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        resBody.forEach(item -> assertEquals("userOne", item.getUsername()));
+        resBody.forEach(item -> assertEquals("userOne", item.getUserId()));
 
     }
 
@@ -72,7 +72,7 @@ public class AccountControllerTest {
         ResponseEntity<Account> result = accountController.getUserAccount(1, "Skywalker");
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals("Skywalker", result.getBody().getUsername());
+        assertEquals("Skywalker", result.getBody().getUserId());
 
     }
 
@@ -89,7 +89,7 @@ public class AccountControllerTest {
         ResponseEntity<Account> result = accountController.deposit(1, "Skywalker", inputAccount);
 
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
-        assertEquals("Skywalker", result.getBody().getUsername());
+        assertEquals("Skywalker", result.getBody().getUserId());
         assertEquals("DEPOSIT", result.getBody().getTransactionType());
         
     }
@@ -106,7 +106,7 @@ public class AccountControllerTest {
         ResponseEntity<Account> result = accountController.withdraw(1, "Skywalker", new Account(1, "Skywalker", 2250,"USD", new Date(), null, 500, "WITHDRAW"));
 
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
-        assertEquals("Skywalker", result.getBody().getUsername());
+        assertEquals("Skywalker", result.getBody().getUserId());
         assertEquals("WITHDRAW", result.getBody().getTransactionType());
 
     }
@@ -119,7 +119,7 @@ public class AccountControllerTest {
         ResponseEntity<Account> result = accountController.createUserAccount(newAcc);
 
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
-        assertEquals("Han Solo", result.getBody().getUsername());
+        assertEquals("Han Solo", result.getBody().getUserId());
 
     }
     

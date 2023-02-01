@@ -16,7 +16,7 @@ public class Account {
 
     @Id
     private int accountId;
-    private String username;
+    private String userId;
     private double balance;
     private String currency;
     private Date creationDate;

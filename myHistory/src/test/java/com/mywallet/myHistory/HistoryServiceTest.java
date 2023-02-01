@@ -26,9 +26,9 @@ public class HistoryServiceTest {
     @Test
     public void getRecentlyUpdatedHistoryAccountTest() {
         List<HistoryAccount> data = new ArrayList<>(Arrays.asList(
-            new HistoryAccount(1, 1, "Luke", 50, "DEPOSIT", 50, "Credits", null, new Date(System.currentTimeMillis()-500000000)),
-            new HistoryAccount(1, 1, "Luke", 100, "DEPOSIT", 50, "Credits", null, new Date(System.currentTimeMillis()-400000000)),
-            new HistoryAccount(1, 1, "Luke", 150, "DEPOSIT", 50, "Credits", null, new Date(System.currentTimeMillis())
+            new HistoryAccount(1, "Luke", 50, "DEPOSIT", 50, "Credits", null, new Date(System.currentTimeMillis()-500000000)),
+            new HistoryAccount(1, "Luke", 100, "DEPOSIT", 50, "Credits", null, new Date(System.currentTimeMillis()-400000000)),
+            new HistoryAccount(1, "Luke", 150, "DEPOSIT", 50, "Credits", null, new Date(System.currentTimeMillis())
         )));
 
         HistoryAccount acc = data.get(0);

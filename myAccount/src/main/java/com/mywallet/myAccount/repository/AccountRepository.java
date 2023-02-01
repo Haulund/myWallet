@@ -29,9 +29,9 @@ public class AccountRepository {
         return accounts;
     }
 
-    public List<Account> getUsersAccounts(String user) {
+    public List<Account> getUsersAccounts(String userId) {
         return accounts.stream()
-            .filter(acc -> acc.getUsername().equalsIgnoreCase(user))
+            .filter(acc -> acc.getUserId().equalsIgnoreCase(userId))
             .collect(Collectors.toList());
     }
     

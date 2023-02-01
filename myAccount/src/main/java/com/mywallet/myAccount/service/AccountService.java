@@ -21,9 +21,9 @@ public class AccountService {
     @Autowired
     HistoryFeignClient historyFeignClient;
    
-    public Account getUserAccount(int id, String user) {
-        if (user.equals(accountRepository.getUserAccount(id).getUsername())) {
-            return accountRepository.getUserAccount(id);
+    public Account getUserAccount(int accountId, String user) {
+        if (user.equals(accountRepository.getUserAccount(accountId).getUserId())) {
+            return accountRepository.getUserAccount(accountId);
         }
         return null;
     }
@@ -64,7 +64,7 @@ public class AccountService {
     }
 
     public boolean usernameAndIdMatchAUser(Account acc, String username) {
-        return username.equalsIgnoreCase(acc.getUsername());
+        return username.equalsIgnoreCase(acc.getUserId());
     }
 
     public Account withdraw(int id, String username, double amount) {

@@ -50,7 +50,7 @@ public class AccountServiceTest {
         List<Account> result = accountService.getAllAccounts();
 
         // Assert
-        assertEquals("Steffen", result.get(0).getUsername());
+        assertEquals("Steffen", result.get(0).getUserId());
         assertEquals("USD", result.get(1).getCurrency());
     }
 
@@ -66,7 +66,7 @@ public class AccountServiceTest {
         Account result = accountService.getUserAccount(0, "Steffen");
 
         // Assert
-        assertEquals("Steffen", result.getUsername());
+        assertEquals("Steffen", result.getUserId());
         assertEquals("DKR", result.getCurrency());
     }
 

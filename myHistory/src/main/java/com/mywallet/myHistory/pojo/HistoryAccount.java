@@ -19,8 +19,7 @@ public class HistoryAccount {
     @Id
     private String id;
     private int accountId;
-    private int userId;
-    private String username;
+    private String userId;
     private double balance;
     private String transactionType;
     private double transactionAmount;
@@ -29,11 +28,10 @@ public class HistoryAccount {
     private Date lastUpdate;
 
 
-    public HistoryAccount(int accountId, int userId, String username, double balance, String transactionType, double transactionAmount, String currency, Date creationDate, Date lastUpdate) {
+    public HistoryAccount(int accountId, String userId, double balance, String transactionType, double transactionAmount, String currency, Date creationDate, Date lastUpdate) {
         this.id = UUID.randomUUID().toString();
         this.accountId = accountId;
         this.userId = userId;
-        this.username = username;
         this.balance = balance;
         this.transactionType = transactionType;
         this.transactionAmount = transactionAmount;
@@ -46,7 +44,6 @@ public class HistoryAccount {
         this.id = UUID.randomUUID().toString();
         this.accountId = acc.accountId;
         this.userId = acc.userId;
-        this.username = acc.username;
         this.balance = acc.balance;
         this.transactionType = acc.transactionType;
         this.transactionAmount = acc.transactionAmount;

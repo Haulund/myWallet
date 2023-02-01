@@ -26,7 +26,7 @@ public class HistoryRepository {
 
     public List<HistoryAccount> getUsersHistory(String username){
         return history.stream()
-            .filter(acc -> acc.getUsername().equalsIgnoreCase(username))
+            .filter(acc -> acc.getUserId().equalsIgnoreCase(username))
             .collect(Collectors.toList());
     }
 
