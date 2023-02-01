@@ -39,4 +39,12 @@ public class UserControllerTest {
         assertEquals(userdb.get(0).getUserId(), result.getBody().get(0).getUserId());
         assertEquals(userdb.get(1).getUsername(), result.getBody().get(1).getUsername());
     }
+
+    @Test
+    public void getSingleUserTest() {
+        when(userService.getSingleUser("userIdOne")).thenReturn(new User("userIdOne", "skywalker", "1234"));
+        ResponseEntity<User> result = userController.getSingleUser("userIdOne");
+        assertEquals("userIdOne", result.getBody().getUserId());
+    }
+
 }

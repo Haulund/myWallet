@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,5 +40,20 @@ public class UserRepositoryTest {
         List<User> result = userRepository.getAllUsers();
         assertEquals(userdb.get(0).getUsername(), result.get(0).getUsername());
         assertEquals(userdb.get(2).getUsername(), result.get(2).getUsername());
+    }
+
+    @Test
+    public void getSingleUser() {
+        List<User> userdb = new ArrayList<>(Arrays.asList(
+            new User("userOne", "skywalker", "1234"),
+            new User("userTwo", "han", "1234"),
+            new User("userThree", "leia", "1234")
+        ));
+
+        when(userRepo.getDb()).thenReturn(userdb);
+
+        User result = userRepository.getSingleUser("userOne");
+
+        assertEquals("userOne", result.getUserId());
     }
 }
